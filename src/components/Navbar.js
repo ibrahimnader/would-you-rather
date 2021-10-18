@@ -1,7 +1,14 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
-
+import { useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
+import { Link,useHistory } from 'react-router-dom'
+import {authed,logedUser,logout} from '../features/users/UsersSlice'
 const Navbar = () => {
+  const userAuthed = useSelector(authed) 
+  const user = useSelector(logedUser)
+  const dispatch = useDispatch()
+  const history=useHistory()
+
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
         <div className="container">
@@ -14,14 +21,24 @@ const Navbar = () => {
                <Link  className="nav-link" to="/home">Home</Link>
               </li>
               <li className="nav-item">
-               <Link className="nav-link"  to="/home">Answered Questions</Link>
+               <Link className="nav-link"  to="/add">New Question</Link>
               </li>
               <li className="nav-item">
-               <Link className="nav-link"  to="/home">Leader Board</Link>
-              </li>
-             
-              
+               <Link className="nav-link"  to="/leaderboard">Leader Board</Link>
+              </li>       
             </ul>
+          {
+            userAuthed?     
+            <ul className="mb-2 mb-lg-0">
+              <img src={user.avatarURL} alt={user.name} className="img-fluid rounded-circle" width="30" height="30" />
+              <span className="text-capitalize text-light ms-2 d-inline-block">{user.name}</span>
+              <button className="btn btn-danger btn-sm ms-4" onClick={() =>{
+              dispatch(logout());
+              history.push("/login");
+            }}>logout</button>
+
+            </ul>:""
+          }
             
           </div>
         </div>
