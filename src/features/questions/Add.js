@@ -45,7 +45,7 @@ const Add = () => {
               dispatch(
                 addQuestion({ optionOneText, optionTwoText, author: user.id })
               );
-              history.push("/home");
+              history.push("/");
             }}
           >
             Add

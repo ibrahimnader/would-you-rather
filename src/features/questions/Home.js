@@ -7,8 +7,10 @@ import { answered, unanswered } from "./questionsSlice";
 
 const Home = () => {
   const user = useSelector(logedUser);
-  const answeredQ = useSelector(answered(user));
-  const unansweredQ = useSelector(unanswered(user));
+  let answeredQ = useSelector(answered(user));
+  let unansweredQ = useSelector(unanswered(user));
+  answeredQ=answeredQ.sort((a,b)=> b.timestamp-a.timestamp )
+  unansweredQ=unansweredQ.sort((a,b)=>b.timestamp - a.timestamp)
  const history= useHistory()
 
   return (

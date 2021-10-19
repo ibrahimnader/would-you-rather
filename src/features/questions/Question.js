@@ -35,13 +35,15 @@ const Question = () => {
                   <div className=" my-4 py-4 px-3 bg-info">
                     Would you rather {question.optionOne.text}
                     <p className="text-danger fw-bolder">
-                      {question.optionOne.votes.length} votes out of{" "}
+                      {question.optionOne.votes.length} votes out of
                       {question.optionOne.votes.length +
                         question.optionTwo.votes.length}
+                        <span className="fw-bolder text-danger d-block">{Math.round(question.optionOne.votes.length*100/(question.optionOne.votes.length +
+                        question.optionTwo.votes.length))} %</span>
                     </p>
                     {user.answers[question.id] === "optionOne" ? (
                       <span className="fw-bolder fs-5 text-dark">
-                        {" "}
+                        
                         Including You
                       </span>
                     ) : (
@@ -54,6 +56,9 @@ const Question = () => {
                       {question.optionTwo.votes.length} votes out of{" "}
                       {question.optionOne.votes.length +
                         question.optionTwo.votes.length}
+                        <span className="fw-bolder text-danger d-block">{Math.round(question.optionTwo.votes.length*100/(question.optionOne.votes.length +
+                        question.optionTwo.votes.length))} %</span>
+
                     </p>
                     {user.answers[question.id] === "optionTwo" ? (
                       <span className="fw-bolder fs-5 text-dark">
@@ -106,7 +111,6 @@ const Question = () => {
                       dispatch(
                         saveAnswerandUpdate({ authedUser: user.id, qid: id, answer })
                       );
-                      history.push("/home");
                     }}
                   >
                     Answer

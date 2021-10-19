@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { updateUsers } from "../users/UsersSlice";
+import { addQuestionToUser, updateUsers } from "../users/UsersSlice";
 import { _getQuestions, _saveQuestion, _saveQuestionAnswer } from "../_DATA";
 
 const initialState = {
@@ -14,7 +14,7 @@ export const getAllQuestions = createAsyncThunk(
     return questions;
   }
 );
-export const addQuestion = createAsyncThunk(
+export const addQuestionthunk = createAsyncThunk(
   "questions/add",
   async (question) => {
     const newquestion = await _saveQuestion(question);
@@ -29,6 +29,10 @@ export const saveAnswer = createAsyncThunk("questions/answer", async (data) => {
 export const saveAnswerandUpdate = (data) => async (dispatch, getState) => {
   await dispatch(saveAnswer(data));
   dispatch(updateUsers(data));
+};
+export const addQuestion = (question) => async (dispatch) => {
+  let {payload}=await dispatch(addQuestionthunk(question));
+  dispatch((addQuestionToUser(payload.id)));
 };
 export const questionsSlice = createSlice({
   name: "questionsSlice",
@@ -45,10 +49,10 @@ export const questionsSlice = createSlice({
         state.status = "idle";
         state.questions = action.payload;
       })
-      .addCase(addQuestion.pending, (state) => {
+      .addCase(addQuestionthunk.pending, (state) => {
         state.status = "loading";
       })
-      .addCase(addQuestion.fulfilled, (state, action) => {
+      .addCase(addQuestionthunk.fulfilled, (state, action) => {
         state.status = "idle";
         state.questions[action.payload.id] = action.payload;
       })

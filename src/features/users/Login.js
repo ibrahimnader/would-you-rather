@@ -1,18 +1,23 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useHistory } from "react-router";
+import { useHistory, useLocation } from "react-router";
 import { getAllQuestions } from "../questions/questionsSlice";
-import { selectUsers, getAllusers, loginandGetQuestions, login } from "./UsersSlice";
+import { selectUsers, getAllusers, loginandGetQuestions, login, logedUser } from "./UsersSlice";
 const Login = () => {
   const users = useSelector(selectUsers);
+  let location = useLocation();
+  const history=useHistory()
+
   const [selectedUser, setselectedUser] = useState();
+  let { from } = location.state || { from: { pathname: "/" } };
+ 
+ 
   const userOptions = Object.entries(users).map((user) => (
     <option value={user[0]} key={user[0]}>
       {user[1].name}
     </option>
   ));
   const dispatch = useDispatch();
-  const history=useHistory()
   useEffect(() => {
     dispatch(getAllusers());
   }, [dispatch]);
@@ -24,8 +29,9 @@ const Login = () => {
           <h5 className="card-title fw-bold text-danger text-uppercase">
             Sign In
           </h5>
-          <p className="card-text">
-            Sign in now to start using the app and answersome questions
+          <p className="card-text"> 
+          {from? <p className="text-warning">You must login to access the pages</p>:""}
+            Sign in now to start using the app and answer some questions
           </p>
           <select
             className="form-select form-select-lg mb-3"
@@ -42,7 +48,7 @@ const Login = () => {
 
               await dispatch(login(selectedUser));
               await dispatch(getAllQuestions());
-              history.push("/home");
+              history.replace(from);
               }
             }}
           >

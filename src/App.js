@@ -17,19 +17,21 @@ function App() {
           <Route path="/login">
             <Login />
           </Route>
-          <PrivateRoute exact path="/home">
+          <PrivateRoute exact path="/">
            <Home/>
           </PrivateRoute>
-          <PrivateRoute path="/add">
+          <PrivateRoute exact path="/add">
             <Add />
           </PrivateRoute>
           <PrivateRoute exact path="/questions/:id">
           <Question />
           </PrivateRoute>
-          <PrivateRoute path="/leadrboard">
+          <PrivateRoute  exact path="/leadrboard">
             <LeaderBoard />
           </PrivateRoute>
-         
+          <Route path="*">
+           <div className="mx-auto fs-1 text-danger mt-4">404 Page Not Found</div>
+          </Route>
           
         </Switch>
       </Router>
