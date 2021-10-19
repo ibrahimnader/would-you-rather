@@ -22,7 +22,7 @@ const Home = () => {
           <button
             className="nav-link active w-50 fw-bold text-black "
             id="nav-unanswered-tab"
-            data-bs-toggle="tab"
+            data-bs-toggle="tab" 
             data-bs-target="#nav-unanswered"
             type="button"
             role="tab"
@@ -52,7 +52,7 @@ const Home = () => {
           role="tabpanel"
           aria-labelledby="nav-answred-tab"
         >
-          {answeredQ.length>0 &&answeredQ.map((answer) => (
+          {answeredQ&&answeredQ.length >0 &&answeredQ.map((answer) => (
             <div className="card  py-4 px-3 w-50 mx-auto mb-3 text-white bg-dark" key={answer.id}>
               <h5 className="card-header text-uppercase border-danger">{answer.author} asks</h5>
               <div className="card-body">
@@ -76,7 +76,7 @@ const Home = () => {
           role="tabpanel"
           aria-labelledby="nav-unanswered-tab"
         >
-          {unansweredQ.length>0 &&unansweredQ.map((answer) => (
+          {unansweredQ &&unansweredQ.length>0 && unansweredQ.map((answer) => (
             <div className="card  py-4 px-3 w-50 mx-auto mb-3 text-white bg-dark" key={answer.id}>
               <h5 className="card-header  border-danger text-uppercase">{answer.author} asks</h5>
               <div className="card-body">

@@ -24,7 +24,7 @@ const Navbar = () => {
                <Link className="nav-link"  to="/add">New Question</Link>
               </li>
               <li className="nav-item">
-               <Link className="nav-link"  to="/leaderboard">Leader Board</Link>
+               <Link className="nav-link"  to="/leadrboard">Leader Board</Link>
               </li>       
             </ul>
           {

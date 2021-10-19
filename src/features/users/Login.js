@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router";
-import { selectUsers, getAllusers, loginandGetQuestions } from "./UsersSlice";
+import { getAllQuestions } from "../questions/questionsSlice";
+import { selectUsers, getAllusers, loginandGetQuestions, login } from "./UsersSlice";
 const Login = () => {
   const users = useSelector(selectUsers);
   const [selectedUser, setselectedUser] = useState();
@@ -36,10 +37,11 @@ const Login = () => {
           </select>
           <button
             className=" btn btn-dark w-100"
-            onClick={() => {
+            onClick={async () => {
               if(selectedUser!=null){
 
-              dispatch(loginandGetQuestions(selectedUser));
+              await dispatch(login(selectedUser));
+              await dispatch(getAllQuestions());
               history.push("/home");
               }
             }}

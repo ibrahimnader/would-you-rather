@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory, useParams } from "react-router";
 import { logedUser, selectUser } from "../users/UsersSlice";
-import { getQuestion, saveAnswer, saveAnswerandUpdate } from "./questionsSlice";
+import { getQuestion, saveAnswerandUpdate } from "./questionsSlice";
 
 const Question = () => {
   const { id } = useParams();

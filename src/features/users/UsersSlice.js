@@ -1,5 +1,4 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { getAllQuestions } from "../questions/questionsSlice";
 import { _getUsers } from "../_DATA";
 
 const initialState = {
@@ -8,10 +7,10 @@ const initialState = {
   authed: false,
   status: "idle",
 };
-export const loginandGetQuestions = (user) => async (dispatch) => {
-  await dispatch(login(user));
-  dispatch(getAllQuestions());
-};
+// export const loginandGetQuestions = (user) => async (dispatch) => {
+//   await dispatch(login(user));
+//   await dispatch(getAllQuestions());
+// };
 
 export const getAllusers = createAsyncThunk("users/getAll", async () => {
   const response = await _getUsers();
