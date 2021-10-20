@@ -1,21 +1,21 @@
-import React, { useState } from "react";
+import React, {  useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useHistory, useParams } from "react-router";
+import {  Redirect, useParams } from "react-router";
 import { logedUser, selectUser } from "../users/UsersSlice";
 import { getQuestion, saveAnswerandUpdate } from "./questionsSlice";
 
 const Question = () => {
   const { id } = useParams();
   const question = useSelector(getQuestion(id));
-  const author = useSelector(selectUser(question.author));
+  const author = useSelector(selectUser(question?question.author:""));
   const user = useSelector(logedUser);
   const [answer, setanswer] = useState();
   const dispatch = useDispatch();
-  const history = useHistory();
+
 
   return (
     <div className="container">
-      <div className="card  mt-5 w-50  mx-auto text-white bg-dark px-4 py-2">
+   {  question &&author? <div className="card  mt-5 w-50  mx-auto text-white bg-dark px-4 py-2">
         <h5 className="card-header fw-bold my-3 border-light">
           <span className="text-uppercase">{author.name}</span> asks
         </h5>
@@ -120,7 +120,7 @@ const Question = () => {
             </div>
           </div>
         </div>
-      </div>
+      </div>:<Redirect to="/404" />}
     </div>
   );
 };

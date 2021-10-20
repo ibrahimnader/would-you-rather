@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory, useLocation } from "react-router";
 import { getAllQuestions } from "../questions/questionsSlice";
-import { selectUsers, getAllusers, loginandGetQuestions, login, logedUser } from "./UsersSlice";
+import { selectUsers, getAllusers, login } from "./UsersSlice";
 const Login = () => {
   const users = useSelector(selectUsers);
   let location = useLocation();
@@ -30,7 +30,7 @@ const Login = () => {
             Sign In
           </h5>
           <p className="card-text"> 
-          {from? <p className="text-warning">You must login to access the pages</p>:""}
+          {from? <span className="text-warning d-block">You must login to access the pages</span>:""}
             Sign in now to start using the app and answer some questions
           </p>
           <select
